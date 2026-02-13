@@ -1,0 +1,29 @@
+# Directories
+data/
+embeddings/
+embeddings_arxiv/
+checkpoints/
+logs/
+sbatch_logs/
+probes_arxiv/
+results/
+results_arxiv/
+figures/
+verbalization/
+verbalization-test/*/
+verbalization-test-alt/
+
+# Keep GPT result text files
+!verbalization-test/*.txt
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
