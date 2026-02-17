@@ -87,11 +87,18 @@ After fine-tuning, the finetuned models should go through the verbalization proc
 
 ### Step 7: GPT-4.1 Results
 
-We include GPT-4.1 and GPT-4.1-mini verbalization results as text files under `verbalization-test/`. These follow the naming convention:
+To reproduce the GPT-4.1 and GPT-4.1-mini results in `verbalization-test/`, run from the `gpt-experiments/` directory with `OPENAI_API_KEY` set:
+
+```bash
+cd gpt-experiments
+bash gpt_verbalization.sh
+```
+
+The output files use lowercase model names (e.g. `gpt-4.1`); the committed files in `verbalization-test/` use uppercase (`GPT-4.1`). The naming convention otherwise follows:
 
 ```
 verbalization-test/{setting}_output_{model}.txt          # e.g., int_sci_compare_output_GPT-4.1.txt
-verbalization-test/{setting}_output_{model}_alt.txt      # Alternative prompt
+verbalization-test/{setting}_output_{model}_alt.txt      # Alternative prompt (--reverse flag)
 verbalization-test/{setting}_output_{model}_{n}shot.txt  # Few-shot (n > 1)
 ```
 
