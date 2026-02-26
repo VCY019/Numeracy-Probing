@@ -15,8 +15,8 @@ pip install -r requirements.txt
 │   ├── construct_data.py       # Generate synthetic comparison datasets
 │   ├── get_embeds.py           # Extract embeddings (synthetic data)
 │   ├── get_embeds_arxiv.py     # Extract embeddings (arXiv data)
-│   ├── train_probe.py          # Train and evaluate linear probes
-│   ├── train_probe_arxiv.py    # Train probes on arXiv embeddings
+│   ├── train_probe.py          # Train and evaluate probes
+│   ├── train_probe_arxiv.py    # Train and evaluate probes on arXiv embeddings
 │   ├── verbalization.py        # Test LLM verbalization accuracy
 │   └── finetune.py             # Probe-aware fine-tuning with LoRA
 ├── scripts/                    # Shell scripts to run the pipeline
@@ -30,7 +30,8 @@ pip install -r requirements.txt
 │   └── verbalization-analysis/ # Few-shot and alt-prompt analysis scripts
 ├── notebooks/                  # Figure generation and error analysis
 ├── data/                       # Generated/downloaded datasets
-├── verbalization-test/         # Verbalization results (including GPT-4.1 results)
+├── verbalization-test/         # Verbalization results (including GPT-4.1 and GPT-4.1-mini results)
+├── gpt-experiments/            # Scripts to reproduce GPT-4.1 and GPT-4.1-mini results
 └── figures/                    # Generated figures
 ```
 
@@ -94,17 +95,17 @@ cd gpt-experiments
 bash gpt_verbalization.sh
 ```
 
-The output files use lowercase model names (e.g. `gpt-4.1`); the committed files in `verbalization-test/` use uppercase (`GPT-4.1`). The naming convention otherwise follows:
+The script outputs use lowercase model names (e.g. `gpt-4.1`), but the committed files in `verbalization-test/` use uppercase (`GPT-4.1`). The naming convention otherwise follows:
 
 ```
-verbalization-test/{setting}_output_{model}.txt          # e.g., int_sci_compare_output_GPT-4.1.txt
-verbalization-test/{setting}_output_{model}_alt.txt      # Alternative prompt (--reverse flag)
+verbalization-test/{setting}_output_{model}.txt          # One-shot (e.g., int_sci_compare_output_GPT-4.1.txt)
+verbalization-test/{setting}_output_{model}_alt.txt      # One-shot with numbers reversed in example
 verbalization-test/{setting}_output_{model}_{n}shot.txt  # Few-shot (n > 1)
 ```
 
-### Step 8: Present Results
+### Step 8: Reproduce results
 
-Run notebooks from the `notebooks/` directory to get camera-ready results. Probe scatter plots are also generated directly by `src/train_probe.py` (with `--eval_test`) and `src/train_probe_arxiv.py` .
+Run notebooks in `notebooks/` to reproduce paper figures and statistics. Note that probe scatter plots (Figure 1) are automatically created during Step 4 when running `src/train_probe.py` (with `--eval_test`) and `src/train_probe_arxiv.py`. All other figures are saved to `figures/`.
 
 #### Script Mapping
 
@@ -115,7 +116,7 @@ Run notebooks from the `notebooks/` directory to get camera-ready results. Probe
 | Figures 3, 10, 13, 14 | `notebooks/error_analysis_probes.ipynb` |
 | Figure 11 | `notebooks/error_analysis_alt_prompt.ipynb` |
 | Figure 12 | `notebooks/error_analysis_few_shot.ipynb` |
-| Numbers in abstract | `notebooks/abstract_regression_error_synthetic.ipynb`, `notebooks/abstract_regression_error_arxiv.ipynb` |
+| Relative errors in abstract | `notebooks/abstract_regression_error_synthetic.ipynb`, `notebooks/abstract_regression_error_arxiv.ipynb` |
 
 ## Models
 
